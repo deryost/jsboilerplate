@@ -1,17 +1,24 @@
 require.config({
-	baseUrl: "js",
-	enforceDefine: false,
+	baseUrl: "js/libs",
+	enforceDefine: true,
 	paths: {
-		jquery: 'libs/jquery',
-		underscore: 'libs/underscore/underscore',
-		backbone: 'libs/backbone/backbone'
+		app: '../app',
+		templates: '../../templates'/*,
+		jquery: 'jquery-1.9.1',
+		'jquery.alpha': 'jquery.alpha',
+		'jquery.beta': 'jquery.beta',
+		underscore: 'underscore',
+		backbone: 'backbone'*/
 	},
 	shim: {
-		'jquery.alpha': {
+		'modernizr': {
+			exports: 'Modernizr'
+		},
+		'jquery/jquery.alpha': {
 			deps: ['jquery'],
 			exports: 'jQuery.fn.alpha'
 		},
-		'jquery.beta': {
+		'jquery/jquery.beta': {
 			deps: ['jquery'],
 			exports: 'jQuery.fn.beta'
 		},
@@ -22,8 +29,8 @@ require.config({
 		'underscore': {
 			exports: '_'
 		},
-		'App': {
-			deps: ['backbone', 'libs/require/text']
+		'app/App': {
+			deps: ['backbone', 'text', 'mustache']
 		}
 
 	},
@@ -31,6 +38,7 @@ require.config({
 });
 
 
-define('main', ['App'], function(App){
+define(['modernizr', 'app/App'], function(Modernizr, App){
+	//alert('Modernizr:' + Modernizr);
 	return {};
 });
